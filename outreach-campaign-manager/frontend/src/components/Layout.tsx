@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, Users, FileText, LogOut, Zap } from 'lucide-react';
+import { LayoutDashboard, Users, FileText, LogOut, Zap, BarChart3, Settings as SettingsIcon } from 'lucide-react';
 
 interface Props {
   children: React.ReactNode;
@@ -18,9 +18,11 @@ export default function Layout({ children }: Props) {
   };
 
   const navItems = [
+    { path: '/master-dashboard', icon: BarChart3, label: 'Master Dashboard' },
     { path: '/', icon: LayoutDashboard, label: 'Campaigns' },
     { path: '/contacts', icon: Users, label: 'Contacts' },
     { path: '/templates', icon: FileText, label: 'Templates' },
+    { path: '/settings', icon: SettingsIcon, label: 'Settings' },
   ];
 
   return (

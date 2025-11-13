@@ -99,10 +99,26 @@ export const touchpointsAPI = {
   update: (id: number, data: any) => api.put(`/touchpoints/${id}`, data),
   execute: (campaignId: number, day?: number) =>
     api.post(`/touchpoints/execute/${campaignId}`, { day }),
+  executeSingle: (id: number) => api.post(`/touchpoints/${id}/execute`),
   getActivity: (campaignId: number, limit?: number) => {
     const params = limit ? `?limit=${limit}` : '';
     return api.get(`/touchpoints/activity/${campaignId}${params}`);
   },
+};
+
+// Integrations API
+export const integrationsAPI = {
+  getAll: () => api.get('/integrations'),
+  getByService: (service: string) => api.get(`/integrations/${service}`),
+  save: (data: any) => api.post('/integrations', data),
+  delete: (service: string) => api.delete(`/integrations/${service}`),
+  test: (service: string, testData: any) => api.post(`/integrations/${service}/test`, testData),
+};
+
+// Dashboard API
+export const dashboardAPI = {
+  getStats: () => api.get('/dashboard/stats'),
+  getRealtime: () => api.get('/dashboard/realtime'),
 };
 
 export default api;

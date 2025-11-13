@@ -7,6 +7,8 @@ import Dashboard from './pages/Dashboard';
 import CampaignBuilder from './pages/CampaignBuilder';
 import ContactManager from './pages/ContactManager';
 import Templates from './pages/Templates';
+import Settings from './pages/Settings';
+import MasterDashboard from './pages/MasterDashboard';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
@@ -71,6 +73,28 @@ function AppRoutes() {
           <PrivateRoute>
             <Layout>
               <Templates />
+            </Layout>
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/master-dashboard"
+        element={
+          <PrivateRoute>
+            <Layout>
+              <MasterDashboard />
+            </Layout>
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/settings"
+        element={
+          <PrivateRoute>
+            <Layout>
+              <Settings />
             </Layout>
           </PrivateRoute>
         }

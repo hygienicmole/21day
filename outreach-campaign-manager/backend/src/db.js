@@ -73,6 +73,9 @@ export function initializeDatabase() {
       sent_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       status TEXT DEFAULT 'sent',
       response TEXT,
+      external_id TEXT,
+      call_duration INTEGER,
+      error_message TEXT,
       FOREIGN KEY (contact_id) REFERENCES contacts(id) ON DELETE CASCADE,
       FOREIGN KEY (sequence_step_id) REFERENCES sequence_steps(id) ON DELETE CASCADE
     );
@@ -90,12 +93,30 @@ export function initializeDatabase() {
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     );
 
+    -- Integrations configuration
+    CREATE TABLE IF NOT EXISTS integrations (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      service TEXT NOT NULL,
+      api_key TEXT,
+      api_secret TEXT,
+      agent_id TEXT,
+      phone_number TEXT,
+      config TEXT,
+      is_active INTEGER DEFAULT 1,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+      UNIQUE(user_id, service)
+    );
+
     -- Create indexes for better performance
     CREATE INDEX IF NOT EXISTS idx_campaigns_user_id ON campaigns(user_id);
     CREATE INDEX IF NOT EXISTS idx_contacts_campaign_id ON contacts(campaign_id);
     CREATE INDEX IF NOT EXISTS idx_sequence_steps_campaign_id ON sequence_steps(campaign_id);
     CREATE INDEX IF NOT EXISTS idx_touchpoints_contact_id ON touchpoints(contact_id);
     CREATE INDEX IF NOT EXISTS idx_templates_user_id ON templates(user_id);
+    CREATE INDEX IF NOT EXISTS idx_integrations_user_id ON integrations(user_id);
   `);
 
   console.log('Database initialized successfully');

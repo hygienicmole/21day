@@ -11,6 +11,8 @@ import contactRoutes from './routes/contacts.js';
 import sequenceRoutes from './routes/sequences.js';
 import templateRoutes from './routes/templates.js';
 import touchpointRoutes from './routes/touchpoints.js';
+import integrationRoutes from './routes/integrations.js';
+import dashboardRoutes from './routes/dashboard.js';
 
 dotenv.config();
 
@@ -34,6 +36,8 @@ app.use('/api/contacts', authenticateToken, contactRoutes);
 app.use('/api/sequences', authenticateToken, sequenceRoutes);
 app.use('/api/templates', authenticateToken, templateRoutes);
 app.use('/api/touchpoints', authenticateToken, touchpointRoutes);
+app.use('/api/integrations', authenticateToken, integrationRoutes);
+app.use('/api/dashboard', authenticateToken, dashboardRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

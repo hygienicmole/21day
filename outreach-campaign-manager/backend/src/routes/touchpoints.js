@@ -207,6 +207,37 @@ router.post('/execute/:campaignId', (req, res) => {
   }
 });
 
+// Execute a specific touchpoint (use real integrations)
+router.post('/:id/execute', async (req, res) => {
+  try {
+    const touchpointId = req.params.id;
+
+    // Verify ownership
+    const touchpoint = db.prepare(`
+      SELECT t.* FROM touchpoints t
+      JOIN contacts c ON t.contact_id = c.id
+      JOIN campaigns cp ON c.campaign_id = cp.id
+      WHERE t.id = ? AND cp.user_id = ?
+    `).get(touchpointId, req.user.id);
+
+    if (!touchpoint) {
+      return res.status(404).json({ error: 'Touchpoint not found' });
+    }
+
+    // Import and execute touchpoint
+    const { executeTouchpoint } = await import('../services/outreach.js');
+    const result = await executeTouchpoint(touchpointId, req.user.id);
+
+    res.json({
+      message: result.success ? 'Touchpoint executed successfully' : 'Touchpoint execution failed',
+      result
+    });
+  } catch (error) {
+    console.error('Execute touchpoint error:', error);
+    res.status(500).json({ error: 'Failed to execute touchpoint', details: error.message });
+  }
+});
+
 // Get campaign activity feed
 router.get('/activity/:campaignId', (req, res) => {
   try {
