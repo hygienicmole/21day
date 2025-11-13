@@ -7,6 +7,16 @@ echo ""
 
 cd "$(dirname "$0")/frontend"
 
+# Check if node_modules exists
+if [ ! -d "node_modules" ]; then
+    echo "❌ ERROR: Dependencies not installed!"
+    echo ""
+    echo "Please run the setup script first:"
+    echo "  ./setup.sh"
+    echo ""
+    exit 1
+fi
+
 echo "🚀 Starting frontend development server..."
 echo "📍 Frontend will be available at: http://localhost:5173"
 echo ""

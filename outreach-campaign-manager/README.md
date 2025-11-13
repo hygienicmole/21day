@@ -120,7 +120,51 @@ outreach-campaign-manager/
 - **Node.js** 18+ and **npm** installed
 - A modern web browser
 
-### Backend Setup
+### 🚀 Quick Setup (Recommended)
+
+**First time setup after cloning the repo:**
+
+1. Navigate to the project directory:
+```bash
+cd outreach-campaign-manager
+```
+
+2. Run the setup script:
+```bash
+./setup.sh
+```
+
+This automated script will:
+- ✅ Install all backend dependencies
+- ✅ Install all frontend dependencies
+- ✅ Initialize the SQLite database
+- ✅ Seed sample data (admin user, templates, sample campaign)
+
+3. Start the servers (in separate terminals):
+
+**Terminal 1 - Backend:**
+```bash
+./start-backend.sh
+```
+
+**Terminal 2 - Frontend:**
+```bash
+./start-frontend.sh
+```
+
+4. Open your browser to `http://localhost:5173`
+
+5. Login with:
+   - **Username**: `admin`
+   - **Password**: `admin123`
+
+---
+
+### 📋 Manual Setup (Alternative)
+
+If you prefer to set up manually or the script doesn't work:
+
+#### Backend Setup
 
 1. Navigate to the backend directory:
 ```bash
@@ -139,7 +183,7 @@ cp .env.example .env
 
 4. Initialize and seed the database:
 ```bash
-npm run init-db
+node src/db.js
 node src/seed.js
 ```
 
@@ -158,7 +202,7 @@ npm run dev
 
 The API will be running at `http://localhost:3000`
 
-### Frontend Setup
+#### Frontend Setup
 
 1. Navigate to the frontend directory (in a new terminal):
 ```bash
@@ -177,7 +221,7 @@ npm run dev
 
 The app will be running at `http://localhost:5173`
 
-### Access the Application
+#### Access the Application
 
 1. Open your browser and navigate to `http://localhost:5173`
 2. Login with default credentials:

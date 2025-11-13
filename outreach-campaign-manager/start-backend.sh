@@ -7,6 +7,16 @@ echo ""
 
 cd "$(dirname "$0")/backend"
 
+# Check if node_modules exists
+if [ ! -d "node_modules" ]; then
+    echo "❌ ERROR: Dependencies not installed!"
+    echo ""
+    echo "Please run the setup script first:"
+    echo "  ./setup.sh"
+    echo ""
+    exit 1
+fi
+
 # Check if database exists
 if [ ! -f "database.db" ]; then
     echo "⚠️  Database not found. Initializing..."

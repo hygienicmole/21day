@@ -1,23 +1,32 @@
 # 🚀 Quick Start Guide
 
-## ✅ Both Servers Are Currently Running!
+## ⚙️ FIRST TIME SETUP (After Cloning Repo)
 
-**Backend:** http://localhost:3000 ✓
-**Frontend:** http://localhost:5173 ✓
+**IMPORTANT:** If you just cloned this repo, you need to install dependencies first!
 
-## 🔐 Login Now!
+Run this ONE TIME:
+```bash
+cd outreach-campaign-manager
+./setup.sh
+```
 
-1. **Open your browser** to: http://localhost:5173
+This will:
+- ✅ Install all backend dependencies
+- ✅ Install all frontend dependencies
+- ✅ Set up the database
+- ✅ Load sample data
 
-2. **Login with:**
-   - Username: `admin`
-   - Password: `admin123`
-
-3. **You should see** the Campaign Dashboard with 1 sample campaign!
+**After setup completes**, continue below to start the servers.
 
 ---
 
-## 🛠️ If You Need to Restart
+## 🚀 Starting the Application
+
+Make sure you've run `./setup.sh` first (see above)!
+
+---
+
+## 🛠️ Start the Servers
 
 ### Option 1: Use the Scripts (Easiest)
 
